@@ -1,13 +1,31 @@
-addEventListener('load', generateElements);
+var config;
+
+addEventListener('load', function() {
+  const request = new Request('config/config.json');
+  
+  fetch(request)
+    .then(response => {
+      if(response.status == 200) {
+	return response.json();
+      } else {
+	throw new Error("Could not fetch config from server!");
+      }
+    }).then(json => {
+      config = json;
+      generateElements();
+    }).catch(error => {
+      console.log(error);
+    });
+});
 
 function generateElements() {
 	// Create DOM structure
 	
-	var mainElement = document.getElementById('generator');
+	var mainElement = document.getElementById(config.rootElementId);
 	mainElement.innerHTML = "";
 	
 	let statusElement = document.createElement('p');
-	statusElement.textContent = "Select a file to upload.";
+	statusElement.textContent = config.messages.status.startup;
 	mainElement.appendChild(statusElement);
 
 	let fileUploadElement = document.createElement('input');
@@ -15,22 +33,22 @@ function generateElements() {
 	mainElement.appendChild(fileUploadElement);
 	
 	let overlayImageElement = new Image();
-	overlayImageElement.src = "assets/img/overlay.png";
+	overlayImageElement.src = config.overlaySource;
 	overlayImageElement.style.display = 'none';
 	mainElement.appendChild(overlayImageElement);
 	
 	fileUploadElement.addEventListener('change', function() {
-		statusElement.textContent = "Uploading file...";
 		
 		if(this.files && this.files[0]) {
-			let uploadedImage = document.createElement("img");
-			uploadedImage.src = URL.createObjectURL(this.files[0]);
+		  statusElement.textContent = config.messages.status.uploading;
+		  let uploadedImage = document.createElement('img');
+		  uploadedImage.src = URL.createObjectURL(this.files[0]);
 			
-			uploadedImage.addEventListener('load', function() {
-				statusElement.textContent = "Processing...";
+		  uploadedImage.addEventListener('load', function() {
+				statusElement.textContent = config.messages.status.processing;
 				
 				// prepare canvas
-				let renderCanvas 		= document.createElement('canvas');
+				let renderCanvas 	= document.createElement('canvas');
 				renderCanvas.width 	= overlayImageElement.width;
 				renderCanvas.height	= overlayImageElement.height;
 		
@@ -39,7 +57,7 @@ function generateElements() {
 				// fill canvas with background color
 				ctx.beginPath();
 				ctx.rect(0, 0, renderCanvas.width, renderCanvas.height);
-				ctx.fillStyle = "#becdbf";
+				ctx.fillStyle = config.backgroundColor;
 				ctx.fill();
 				
 				// scale uploaded image
@@ -65,25 +83,25 @@ function generateElements() {
 				ctx.drawImage(overlayImageElement, 0, 0);
 				
 				// set image url to blob
-        let downloadImageElement = document.createElement("img");
+        let downloadImageElement = document.createElement('img');
       	downloadImageElement.src = renderCanvas.toDataURL();
         mainElement.appendChild(downloadImageElement);
 
-      	statusElement.textContent = "Done!";
+      	statusElement.textContent = config.messages.status.done;
 
 				// create downloadlink
-        let downloadButtonElement = document.createElement("a");
-        downloadButtonElement.innerText = "Download";
+        let downloadButtonElement = document.createElement('a');
+        downloadButtonElement.innerText = config.messages.buttons.download;
         downloadButtonElement.href = renderCanvas.toDataURL();
-        downloadButtonElement.download = "image.png";
+        downloadButtonElement.download = config.profilePictureName;
         mainElement.appendChild(downloadButtonElement);
         
         // create recreate button and remove filechooser
         mainElement.removeChild(fileUploadElement);
 
-        let renewFormElement = document.createElement("button");
-        renewFormElement.innerText = "Neues Bild generieren...";
-        renewFormElement.addEventListener("click", function(){
+        let renewFormElement = document.createElement('button');
+        renewFormElement.innerText = config.messages.buttons.newImage;
+        renewFormElement.addEventListener('click', function(){
           generateElements();
         });
         mainElement.appendChild(renewFormElement);

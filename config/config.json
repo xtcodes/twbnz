@@ -1,0 +1,18 @@
+{
+	"profilePictureName": "image.png", 
+	"overlaySource": "assets/img/overlay.png", 
+	"backgroundColor": "#becdbf", 
+	"rootElementId": "generator", 
+	"messages": {
+		"status": {
+			"startup": "Bitte Profilbild auswählen", 
+			"uploading": "Datei wird importiert, bitte warten...", 
+			"processing": "Datei wird verarbeitet, bitte warten...", 
+			"done": "Fertig!"
+		}, 
+		"buttons": {
+			"download": "Bild herunterladen!", 
+			"newImage": "Neues Profilbild erstellen."
+		}
+	}
+}
