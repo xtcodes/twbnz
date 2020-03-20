@@ -79,7 +79,7 @@ function generateElements() {
 				generator.addLayer(overlayImageElement, {});
 				
 				// add logos
-				let nextX = 75;
+				let nextX = 70;
 				logoImageElements.forEach(logo => {
 					renderOptions = {
 						offset: {
