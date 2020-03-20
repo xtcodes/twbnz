@@ -1,8 +1,14 @@
 {
 	"profilePictureName": "image.png", 
-	"overlaySource": "assets/img/gelbkrisenkultur.png", 
-	"backgroundColor": "#becdbf", 
+	"overlaySource": "assets/img/rahmen/tuerkis.png", 
+	"backgroundColor": "#ffffff", 
 	"rootElementId": "generator", 
+	"logoSources": [
+		"assets/img/logos/gegen-das-virus.png",
+		"assets/img/logos/krisen-kultur.png",
+		"assets/img/logos/krisen-kultur-news.png",
+		"assets/img/logos/gemeinschaft-online.png"
+	],
 	"messages": {
 		"status": {
 			"startup": "Bitte Profilbild auswählen", 
