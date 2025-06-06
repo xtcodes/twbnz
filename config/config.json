@@ -2,7 +2,7 @@
 	"profilePictureName": "image.png", 
 	"overlaySource": "assets/img/rahmen/tuerkis.png", 
 	"backgroundColor": "#ffffff", 
-	"rootElementId": "generator", 
+	"rootElementId": "app", 
 	"logoSources": [
 		"assets/img/logos/gemeinschaft-online.png",
 		"assets/img/logos/gegen-das-virus.png",
