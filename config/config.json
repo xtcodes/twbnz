@@ -12,14 +12,14 @@
 	],
 	"messages": {
 		"status": {
-			"startup": "Bitte Profilbild auswählen", 
+			"startup": "Silakan pilih gambar profil.", 
 			"uploading": "Datei wird importiert, bitte warten...", 
 			"processing": "Datei wird verarbeitet, bitte warten...", 
-			"done": "Fertig!"
+			"done": "Berhasil dibuat!"
 		}, 
 		"buttons": {
-			"download": "Bild herunterladen!", 
-			"newImage": "Neues Profilbild erstellen."
+			"download": "Download", 
+			"newImage": "Ganti Foto."
 		}
 	}
 }
