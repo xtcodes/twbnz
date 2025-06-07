@@ -12,9 +12,9 @@
 	],
 	"messages": {
 		"status": {
-			"startup": "Silakan pilih gambar profil.", 
-			"uploading": "Datei wird importiert, bitte warten...", 
-			"processing": "Datei wird verarbeitet, bitte warten...", 
+			"startup": "Silakan pilih gambar terbaik Anda.", 
+			"uploading": "Mengimpor file, harap tunggu...", 
+			"processing": "Berkas sedang diproses, harap tunggu...", 
 			"done": "Berhasil dibuat!"
 		}, 
 		"buttons": {
