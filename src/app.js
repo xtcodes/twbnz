@@ -27,17 +27,12 @@ class Generator {
 	}
 
 addLayer(image, options = {}) {
-  const canvasWidth = this.renderCanvas.width;
-  const canvasHeight = this.renderCanvas.height;
+  const canvasSize = Math.min(this.renderCanvas.width, this.renderCanvas.height);
+  
+  // Ambil offset kalau ada
+  const x = options.offset?.left || 0;
+  const y = options.offset?.top || 0;
 
-  // Hitung rasio skala untuk menjaga aspect ratio
-  const ratio = Math.min(canvasWidth / image.width, canvasHeight / image.height);
-  const newWidth = image.width * ratio;
-  const newHeight = image.height * ratio;
-
-  // Pusatkan gambar
-  const x = (canvasWidth - newWidth) / 2;
-  const y = (canvasHeight - newHeight) / 2;
-
-  this.renderContext.drawImage(image, x, y, newWidth, newHeight);
+  this.renderContext.drawImage(image, x, y, canvasSize, canvasSize);
+}
 }
