@@ -25,17 +25,19 @@ class Generator {
 		this.renderContext.fillStyle = options.backgroundColor ? options.backgroundColor : Generator.defaults.backgroundColor;
 		this.renderContext.fill();
 	}
-	
-	addLayer(image, options) {
-		let x = options.offset && options.offset.left ? options.offset.left : Generator.defaults.offset.left;
-		let y = options.offset && options.offset.top ? options.offset.top : Generator.defaults.offset.top;
-		
-		let scale = options.scale ? options.scale : Generator.defaults.scale;
-		
-		this.renderContext.drawImage(image, x, y, image.width * scale, image.height * scale);
-	}
-	
-	render() {
-		return this.renderCanvas.toDataURL();
-	}
+
+addLayer(image, options = {}) {
+  const canvasWidth = this.renderCanvas.width;
+  const canvasHeight = this.renderCanvas.height;
+
+  // Hitung rasio skala untuk menjaga aspect ratio
+  const ratio = Math.min(canvasWidth / image.width, canvasHeight / image.height);
+  const newWidth = image.width * ratio;
+  const newHeight = image.height * ratio;
+
+  // Pusatkan gambar
+  const x = (canvasWidth - newWidth) / 2;
+  const y = (canvasHeight - newHeight) / 2;
+
+  this.renderContext.drawImage(image, x, y, newWidth, newHeight);
 }
